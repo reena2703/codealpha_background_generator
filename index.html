@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Generator</title>
+    <link href="styles.css" rel="stylesheet"/>
+     
+</head>
+<body>
+    <h1>Background Color Generator</h1>
+    <div class="color-box" id="colorBox"></div>
+    <button onclick="generateRandomColor()">Generate Color</button>
+    <input type="color" id="customColorPicker">
+    <button onclick="setCustomColor()">Set Custom Color</button>
+    <button onclick="copyColorCode()">Copy Color Code</button>
+    <p id="colorCode"></p>
+
+    <script>
+        function generateRandomColor() {
+            const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+            document.getElementById("colorBox").style.backgroundColor = randomColor;
+            document.getElementById("colorCode").textContent = `Color Code: ${randomColor}`;
+        }
+
+        function setCustomColor() {
+            const customColor = document.getElementById("customColorPicker").value;
+            document.getElementById("colorBox").style.backgroundColor = customColor;
+            document.getElementById("colorCode").textContent = `Color Code: ${customColor}`;
+        }
+
+        function copyColorCode() {
+            const colorCode = document.getElementById("colorCode").textContent;
+            const textArea = document.createElement("textarea");
+            textArea.value = colorCode;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            alert("Color code copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
